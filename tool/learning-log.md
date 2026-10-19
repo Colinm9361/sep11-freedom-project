@@ -1,13 +1,13 @@
 # Tool Learning Log
 
-## Tool: **X**
+## Tool: **GDevelop & Kaboom**
 
-## Project: **X**
+## Project: **Freedom Project (game)**
 
 ---
 
-### X/X/XX:
-* Text
+### 10/19/26:
+* Today I began to look in GDevelop to see how it works. It seems very interesting and fun, but at my current stance, I'm trying to connect it to JS or have it run both as the site and a mix of JS for code.
 
 ### X/X/XX:
 * Text
