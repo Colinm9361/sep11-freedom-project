@@ -16,8 +16,8 @@
 * After viewing code of a Gdevelop endless runner game as concept, the setup of how it runs seens to be a lot of conditions, and return functions, but written not in code, but something like code.org and scratch sort of layout, I didn't edit any code, but looking at the code, it doesn't seem hard, I just need to add elements and sprites, and optionally, give them function.
 
 
-### X/X/XX:
-* Text
+### Nov/23/26:
+* Starting the 16, I had switched my code of choice to kaboom.js since it seemed easier to look into, and upon looking at the code, It seems simple to impliment multiple aspects of kaboom into my game, like sprites, runner type games, potential obstacles, and lastly, effects as a result of something, that I could use to make my game more interactive, or interesting.
 
 <!-- 
 * Links you used today (websites, videos, etc)
