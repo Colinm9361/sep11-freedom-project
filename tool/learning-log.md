@@ -19,6 +19,9 @@
 ### Nov/23/26:
 * Starting the 16, I had switched my code of choice to kaboom.js since it seemed easier to look into, and upon looking at the code, It seems simple to impliment multiple aspects of kaboom into my game, like sprites, runner type games, potential obstacles, and lastly, effects as a result of something, that I could use to make my game more interactive, or interesting.
 
+### Nov/27/26
+* 
+
 <!-- 
 * Links you used today (websites, videos, etc)
 * Things you tried, progress you made, etc
