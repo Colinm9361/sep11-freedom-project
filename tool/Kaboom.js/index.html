@@ -12,7 +12,7 @@ const JUMP_FORCE = 850
 const SPEED = 480
 
 // Load assets (make sure the path matches your actual folder/file name)
-loadSprite("poopoo", "Sprites/poopoo.png")
+loadSprite("papa", "Sprites/papa.png")
 
 // Game Scene
 scene("game", () => {
@@ -20,7 +20,7 @@ scene("game", () => {
 
     // Add player inside the scene (renamed to "player" so all your functions match)
     const player = add([
-        sprite("poopoo"),
+        sprite("papa"),
         pos(80, 40),
         area(),
         body(),
@@ -87,7 +87,7 @@ scene("game", () => {
 // Lose Scene
 scene("lose", (score) => {
     add([
-        sprite("poopoo"), // Changed from loadSprite() to sprite()
+        sprite("papa"), // Changed from loadSprite() to sprite()
         pos(width() / 2, height() / 2 - 64),
         scale(2),
         anchor("center"),
