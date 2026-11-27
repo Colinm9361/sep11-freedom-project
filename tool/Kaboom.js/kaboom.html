@@ -21,21 +21,25 @@ kaboom()
 setBackground(141, 183, 255)
 
 // load assets
-loadSprite("potato", /img/potato.png)
+loadSprite("potato", "img/potato.png")
+
+	// add a game object and placing our player character
+const potato = add([
+    sprite("potato"),
+    pos(80, 40),
+    area(),
+    body(),
+])
+
+// .jump() when "space" key is pressed
+onKeyPress("space", () => {
+    potato.jump()
+})
 
 scene("game", () => {
 
 	// define gravity
 	setGravity(2400)
-
-	// add a game object to screen
-	const player = add([
-		// list of components
-		sprite("potato"),
-		pos(80, 40),
-		area(),
-		body(),
-	])
 
 	// floor
 	add([
@@ -48,30 +52,35 @@ scene("game", () => {
 		color(132, 101, 236),
 	])
 
+	onKeyPress("space", () => {
+		if (potato.isGrounded()) {
+			potato.jump();
+		}
+	});
+
 	function jump() {
 		if (player.isGrounded()) {
 			player.jump(JUMP_FORCE)
 		}
 	}
 
-	// jump when user press space
-	onKeyPress("space", jump)
-	onClick(jump)
 
 	function spawnTree() {
 
-		// add tree obj
+		// add tree
+	loop(1, () => {
+    // add tree
 		add([
-			rect(48, rand(32, 96)),
+			rect(48, rand(24, 64)),
 			area(),
 			outline(4),
-			pos(width(), height() - FLOOR_HEIGHT),
+			pos(width(), height() - 48),
 			anchor("botleft"),
-			color(238, 143, 203),
-			move(LEFT, SPEED),
-			offscreen({ destroy: true }),
-			"tree",
-		])
+			color(255, 180, 255),
+			move(LEFT, 240),
+			"tree", // add a tag here
+		]);
+	});
 
 		// wait a random amount of time to spawn next tree
 		wait(rand(0.5, 1.5), spawnTree)
@@ -108,7 +117,7 @@ scene("game", () => {
 scene("lose", (score) => {
 
 	add([
-		sprite("potato"),
+		loadSprite("potato"),
 		pos(width() / 2, height() / 2 - 64),
 		scale(2),
 		anchor("center"),
