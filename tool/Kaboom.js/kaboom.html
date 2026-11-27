@@ -22,7 +22,7 @@ kaboom()
 setBackground(141, 183, 255)
 
 // load assets
-loadSprite("bean", "/sprites/bean.png")
+loadSprite("potato", "/sprites/potato.png")
 
 scene("game", () => {
 
@@ -32,7 +32,7 @@ scene("game", () => {
 	// add a game object to screen
 	const player = add([
 		// list of components
-		sprite("bean"),
+		sprite("potato"),
 		pos(80, 40),
 		area(),
 		body(),
@@ -109,7 +109,7 @@ scene("game", () => {
 scene("lose", (score) => {
 
 	add([
-		sprite("bean"),
+		sprite("potato"),
 		pos(width() / 2, height() / 2 - 64),
 		scale(2),
 		anchor("center"),
