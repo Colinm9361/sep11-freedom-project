@@ -3,142 +3,109 @@
 // import kaboom.js
 import kaboom from "https://unpkg.com/kaboom@3000.0.1/dist/kaboom.mjs";
 
-// initialize kaboom context
-
-// add a piece of text at position (120, 80)
-add([
-    text("hello"),
-    pos(120, 80),
-]);
+// Initialize kaboom FIRST
+kaboom()
+setBackground(141, 183, 255)
 
 const FLOOR_HEIGHT = 48
 const JUMP_FORCE = 850
 const SPEED = 480
 
-// initialize context
-kaboom()
+// Load assets (make sure the path matches your actual folder/file name)
+loadSprite("potato", "img/potato.png")
 
-setBackground(141, 183, 255)
-
-// load assets
-loadSprite("potato", "/img/potato.png.png")
-
-	// add a game object and placing our player character
-const potato = add([
-    sprite("potato"),
-    pos(80, 40),
-    area(),
-    body(),
-])
-
-// .jump() when "space" key is pressed
-onKeyPress("space", () => {
-    potato.jump()
-})
-
+// Game Scene
 scene("game", () => {
+    setGravity(2400)
 
-	// define gravity
-	setGravity(2400)
+    // Add player inside the scene (renamed to "player" so all your functions match)
+    const player = add([
+        sprite("potato"),
+        pos(80, 40),
+        area(),
+        body(),
+    ])
 
-	// floor
-	add([
-		rect(width(), FLOOR_HEIGHT),
-		outline(4),
-		pos(0, height()),
-		anchor("botleft"),
-		area(),
-		body({ isStatic: true }),
-		color(132, 101, 236),
-	])
+    // Floor
+    add([
+        rect(width(), FLOOR_HEIGHT),
+        outline(4),
+        pos(0, height()),
+        anchor("botleft"),
+        area(),
+        body({ isStatic: true }),
+        color(132, 101, 236),
+    ])
 
-	onKeyPress("space", () => {
-		if (potato.isGrounded()) {
-			potato.jump();
-		}
-	});
+    function jump() {
+        if (player.isGrounded()) {
+            player.jump(JUMP_FORCE)
+        }
+    }
 
-	function jump() {
-		if (player.isGrounded()) {
-			player.jump(JUMP_FORCE)
-		}
-	}
+    onKeyPress("space", jump)
+    onClick(jump)
 
+    function spawnTree() {
+        add([
+            rect(48, rand(24, 64)),
+            area(),
+            outline(4),
+            pos(width(), height() - FLOOR_HEIGHT),
+            anchor("botleft"),
+            color(255, 180, 255),
+            move(LEFT, SPEED),
+            "tree",
+        ])
 
-	function spawnTree() {
+        // Wait a random amount of time to spawn next tree
+        wait(rand(0.5, 1.5), spawnTree)
+    }
 
-		// add tree
-	loop(1, () => {
-    // add tree
-		add([
-			rect(48, rand(24, 64)),
-			area(),
-			outline(4),
-			pos(width(), height() - 48),
-			anchor("botleft"),
-			color(255, 180, 255),
-			move(LEFT, 240),
-			"tree", // add a tag here
-		]);
-	});
+    spawnTree()
 
-		// wait a random amount of time to spawn next tree
-		wait(rand(0.5, 1.5), spawnTree)
+    // Collision
+    player.onCollide("tree", () => {
+        go("lose", score)
+        burp()
+        addKaboom(player.pos)
+    })
 
-	}
+    // Score
+    let score = 0
+    const scoreLabel = add([
+        text(score),
+        pos(24, 24),
+    ])
 
-	// start spawning trees
-	spawnTree()
-
-	// lose if player collides with any game obj with tag "tree"
-	player.onCollide("tree", () => {
-		// go to "lose" scene and pass the score
-		go("lose", score)
-		burp()
-		addKaboom(player.pos)
-	})
-
-	// keep track of score
-	let score = 0
-
-	const scoreLabel = add([
-		text(score),
-		pos(24, 24),
-	])
-
-	// increment score every frame
-	onUpdate(() => {
-		score++
-		scoreLabel.text = score
-	})
-
+    onUpdate(() => {
+        score++
+        scoreLabel.text = score
+    })
 })
 
+// Lose Scene
 scene("lose", (score) => {
+    add([
+        sprite("potato"), // Changed from loadSprite() to sprite()
+        pos(width() / 2, height() / 2 - 64),
+        scale(2),
+        anchor("center"),
+    ])
 
-	add([
-		loadSprite("potato"),
-		pos(width() / 2, height() / 2 - 64),
-		scale(2),
-		anchor("center"),
-	])
+    add([
+        text(score),
+        pos(width() / 2, height() / 2 + 64),
+        scale(2),
+        anchor("center"),
+    ])
 
-	// display score
-	add([
-		text(score),
-		pos(width() / 2, height() / 2 + 64),
-		scale(2),
-		anchor("center"),
-	])
-
-	// go back to game with space is pressed
-	onKeyPress("space", () => go("game"))
-	onClick(() => go("game"))
-
+    onKeyPress("space", () => go("game"))
+    onClick(() => go("game"))
 })
 
+// Start game
 go("game")
-
 
 </script>
 
