@@ -20,7 +20,7 @@
 * Starting the 16, I had switched my code of choice to kaboom.js since it seemed easier to look into, and upon looking at the code, It seems simple to impliment multiple aspects of kaboom into my game, like sprites, runner type games, potential obstacles, and lastly, effects as a result of something, that I could use to make my game more interactive, or interesting.
 
 ### Nov/27/26
-* 
+* I finally began making my code, and was able to import my own png sprite, in my runner, altered the colors, and got the code to function without breaking. Learning how the LoadSprite() code works, creating, `loadSprite("papa", "Sprites/papa.png")`. Next, ill learn how to make the sprite animated. If not, ill try to add coins, or like abilities and such.
 
 <!-- 
 * Links you used today (websites, videos, etc)
