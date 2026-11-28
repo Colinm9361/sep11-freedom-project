@@ -64,6 +64,7 @@ scene("game", () => {
     }
 
     spawnTree()
+
     // adds my random sprite
     function spawnBumpy(){
         add([
@@ -81,6 +82,10 @@ scene("game", () => {
 
         player.onCollideUpdate("enemy", () => {
         })
+        
+        wait(rand(0.5, 1.5), spawnBumpy)
+    }
+    (spawnBumpy)
 
     // Collision
     player.onCollide("tree", () => {
@@ -91,8 +96,7 @@ scene("game", () => {
 
     player.onCollideUpdate("enemy", () => {
     })
-}
-    wait(rand(0.5, 2.5), spawnBumpy)
+
 
     // Score
     let score = 0
