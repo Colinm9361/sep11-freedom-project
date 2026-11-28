@@ -85,7 +85,7 @@ scene("game", () => {
         
         wait(rand(0.5, 1.5), spawnBumpy)
     }
-    (spawnBumpy)
+    spawnBumpy()
 
     // Collision
     player.onCollide("tree", () => {
