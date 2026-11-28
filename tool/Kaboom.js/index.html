@@ -8,11 +8,12 @@ kaboom()
 setBackground(255, 234, 168)
 
 const FLOOR_HEIGHT = 48
-const JUMP_FORCE = 850
-const SPEED = 480
+const JUMP_FORCE = 960
+const SPEED = 500
 
-// Load assets (make sure the path matches your actual folder/file name)
+// Load assets 
 loadSprite("papa", "Sprites/papa.png")
+loadSprite("bumpy", "Sprites/bumpy.png")
 
 // Game Scene
 scene("game", () => {
@@ -48,7 +49,7 @@ scene("game", () => {
 
     function spawnTree() {
         add([
-            rect(48, rand(24, 64)),
+			rect(48, rand(32, 96)),
             area(),
             outline(4),
             pos(width(), height() - FLOOR_HEIGHT),
@@ -64,12 +65,29 @@ scene("game", () => {
 
     spawnTree()
 
+    add([
+		sprite("bumpy"),
+		pos(20, rand(40, 84)),
+		// Both objects must have area() component to enable collision detection between
+		area(),
+		"enemy",
+	])
+
+    player.onCollide("enemy", (enemy) => {
+	destroy(enemy)
+    burp()
+    })
+
     // Collision
     player.onCollide("tree", () => {
         go("lose", score)
         burp()
         addKaboom(player.pos)
     })
+
+    player.onCollideUpdate("enemy", () => {
+    })
+
 
     // Score
     let score = 0
