@@ -64,22 +64,23 @@ scene("game", () => {
     }
 
     spawnTree()
+    // adds my random sprite
+    function spawnBumpy(){
+        add([
+            sprite("bumpy"),
+            pos(rand(50, 60), rand(40, 90)),
+            // Both objects must have area() component to enable collision detection between
+            area(),
+            "enemy",
+        ])
 
-    add([
-		sprite("bumpy"),
-		pos(rand(50, 60), rand(40, 90)),
-		// Both objects must have area() component to enable collision detection between
-		area(),
-		"enemy",
-	])
+        player.onCollide("enemy", (enemy) => {
+        destroy(enemy)
+        burp()
+        })
 
-    player.onCollide("enemy", (enemy) => {
-	destroy(enemy)
-    burp()
-    })
-
-    player.onCollideUpdate("enemy", () => {
-    })
+        player.onCollideUpdate("enemy", () => {
+        })
 
     // Collision
     player.onCollide("tree", () => {
@@ -90,7 +91,8 @@ scene("game", () => {
 
     player.onCollideUpdate("enemy", () => {
     })
-
+}
+    wait(rand(0.5, 2.5), spawnBumpy)
 
     // Score
     let score = 0
