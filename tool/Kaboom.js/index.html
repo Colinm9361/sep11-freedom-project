@@ -67,7 +67,7 @@ scene("game", () => {
 
     add([
 		sprite("bumpy"),
-		pos(20, rand(40, 84)),
+		pos(rand(50, 60), rand(40, 90)),
 		// Both objects must have area() component to enable collision detection between
 		area(),
 		"enemy",
@@ -76,6 +76,9 @@ scene("game", () => {
     player.onCollide("enemy", (enemy) => {
 	destroy(enemy)
     burp()
+    })
+
+    player.onCollideUpdate("enemy", () => {
     })
 
     // Collision
